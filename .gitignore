@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# Lockfiles de otros gestores (este repo usa pnpm)
+package-lock.json
+yarn.lock
+
 # Build
 dist/
 dist-ssr/

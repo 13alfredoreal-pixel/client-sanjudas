@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useAuthPage = () => {
-    const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
 
-    const handleToggleForm = () => {
-        setIsLogin(!isLogin);
-    };
+  const handleToggleForm = () => {
+    setIsLogin(!isLogin);
+  };
 
-    const handleRegisterSuccess = () => {
-        // Cambiar automáticamente al login después del registro exitoso
-        setIsLogin(true);
-    };
+  const handleRegisterSuccess = () => {
+    // Cambiar automáticamente al login después del registro exitoso
+    setIsLogin(true);
+  };
 
-    return {
-        isLogin,
-        handleToggleForm,
-        handleRegisterSuccess
-    };
+  return {
+    isLogin,
+    handleToggleForm,
+    handleRegisterSuccess,
+  };
 };

@@ -1,6 +1,6 @@
 name: Task
 description: Tarea técnica, documentación o infraestructura (UI)
-title: "[BSJT-???] "
+title: '[BSJT-???] '
 labels:
   - task
 body:

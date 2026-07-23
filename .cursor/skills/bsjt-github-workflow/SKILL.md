@@ -9,11 +9,11 @@ description: >-
 
 ## Nomenclatura
 
-| Elemento | Formato | Ejemplo |
-|----------|---------|---------|
-| Issue | `[BSJT-012] Título` | `[BSJT-012] Viewer: persist page` |
-| Rama | `BSJT-012` | solo el ID |
-| PR | `[BSJT-012] …` + `Closes #12` | |
+| Elemento | Formato                       | Ejemplo                           |
+| -------- | ----------------------------- | --------------------------------- |
+| Issue    | `[BSJT-012] Título`           | `[BSJT-012] Viewer: persist page` |
+| Rama     | `BSJT-012`                    | solo el ID                        |
+| PR       | `[BSJT-012] …` + `Closes #12` |                                   |
 
 Label sugerido: `repo:client`.
 

@@ -2,12 +2,12 @@
 
 SPA de la biblioteca digital institucional **San Judas Tadeo**.
 
-| | |
-|--|--|
-| API hermana | [server-sanJudas](https://github.com/13alfredoreal-pixel/server-sanJudas) |
-| Agentes | [AGENTS.md](./AGENTS.md) |
-| Consumo API | [docs/API-CONSUMER.md](./docs/API-CONSUMER.md) |
-| Estado as-is | [docs/CURRENT-STATE.md](./docs/CURRENT-STATE.md) |
+|              |                                                                           |
+| ------------ | ------------------------------------------------------------------------- |
+| API hermana  | [server-sanJudas](https://github.com/13alfredoreal-pixel/server-sanJudas) |
+| Agentes      | [AGENTS.md](./AGENTS.md)                                                  |
+| Consumo API  | [docs/API-CONSUMER.md](./docs/API-CONSUMER.md)                            |
+| Estado as-is | [docs/CURRENT-STATE.md](./docs/CURRENT-STATE.md)                          |
 
 **Dos repos independientes** (no monorepo). Clonar ambos si desarrollas full-stack:
 
@@ -16,10 +16,10 @@ git clone https://github.com/13alfredoreal-pixel/client-sanjudas.git
 git clone https://github.com/13alfredoreal-pixel/server-sanJudas.git
 ```
 
-| Capa | URL prod |
-|------|----------|
-| SPA (este repo) | https://biblioteca-sjt.web.app |
-| API | https://base-rho-lyart.vercel.app |
+| Capa            | URL prod                          |
+| --------------- | --------------------------------- |
+| SPA (este repo) | https://biblioteca-sjt.web.app    |
+| API             | https://base-rho-lyart.vercel.app |
 
 ## Stack
 
@@ -29,13 +29,13 @@ React 19 · Vite 7 · Tailwind CSS 4 · React Router 7 · Axios · react-pdf · 
 
 ```bash
 cp .env.example .env   # opcional; ver nota de API URL abajo
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Abre `http://localhost:5173`.
 
-Para API local, arranca también server-sanJudas (`npm run dev`).
+Para API local, arranca también server-sanJudas (`pnpm dev`).
 
 ### API URL
 
@@ -49,19 +49,21 @@ CORS del server ya permite `localhost:5173`.
 
 ## Scripts
 
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Vite HMR |
-| `npm run build` | Build → `dist/` |
-| `npm run preview` | Preview del build |
-| `npm run lint` | ESLint |
+| Comando             | Descripción         |
+| ------------------- | ------------------- |
+| `pnpm dev`          | Vite HMR            |
+| `pnpm build`        | Build → `dist/`     |
+| `pnpm preview`      | Preview del build   |
+| `pnpm lint`         | ESLint              |
+| `pnpm format`       | Prettier write      |
+| `pnpm format:check` | Prettier check (CI) |
 
 ## Deploy
 
-Firebase Hosting proyecto `biblioteca-sjt` → https://biblioteca-sjt.web.app  
+Firebase Hosting proyecto `biblioteca-sjt` → https://biblioteca-sjt.web.app
 
 ```bash
-npm run build
+pnpm build
 firebase deploy --only hosting
 ```
 

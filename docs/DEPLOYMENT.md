@@ -2,18 +2,18 @@
 
 ## Producción
 
-| Recurso | Valor |
-|---------|-------|
-| Host | Firebase Hosting |
-| Proyecto | `biblioteca-sjt` (`.firebaserc`) |
-| Build output | `dist/` |
-| URL | https://biblioteca-sjt.web.app |
+| Recurso      | Valor                            |
+| ------------ | -------------------------------- |
+| Host         | Firebase Hosting                 |
+| Proyecto     | `biblioteca-sjt` (`.firebaserc`) |
+| Build output | `dist/`                          |
+| URL          | https://biblioteca-sjt.web.app   |
 
 ## Build & deploy
 
 ```bash
-npm ci
-npm run build
+pnpm install --frozen-lockfile
+pnpm build
 firebase deploy --only hosting
 ```
 

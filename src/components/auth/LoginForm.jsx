@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useLogin } from "../../hooks/useLogin";
-import logo from "../../assets/img/logo.png";
+import React, { useState } from 'react';
+import { useLogin } from '../../hooks/useLogin';
+import logo from '../../assets/img/logo.png';
 
 export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const { login, loading, error, clearError } = useLogin();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     if (error) {
       clearError();
@@ -30,7 +30,7 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
         onLoginSuccess(result.data.userDetails);
       }
     } else {
-      console.error("Error en login:", result.error);
+      console.error('Error en login:', result.error);
     }
   };
 
@@ -40,18 +40,10 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
         <div className="p-8 md:p-12">
           <div className="text-center mb-10">
             <div className="inline-block p-4 bg-white/5 rounded-3xl backdrop-blur-md shadow-inner mb-6 transition-transform hover:scale-110">
-              <img
-                src={logo}
-                alt="Logo"
-                className="w-20 h-20 object-contain"
-              />
+              <img src={logo} alt="Logo" className="w-20 h-20 object-contain" />
             </div>
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              Bienvenido de nuevo
-            </h2>
-            <p className="mt-2 text-white/60 font-medium">
-              Biblioteca Digital Escolar
-            </p>
+            <h2 className="text-3xl font-bold text-white tracking-tight">Bienvenido de nuevo</h2>
+            <p className="mt-2 text-white/60 font-medium">Biblioteca Digital Escolar</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -96,7 +88,10 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
             </div>
 
             <div className="flex items-center justify-end">
-              <a href="#!" className="text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors">
+              <a
+                href="#!"
+                className="text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
+              >
                 ¿Olvidaste tu contraseña?
               </a>
             </div>
@@ -106,7 +101,7 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Verificando..." : "Iniciar Sesión"}
+              {loading ? 'Verificando...' : 'Iniciar Sesión'}
             </button>
 
             <div className="relative mt-8">
@@ -131,4 +126,4 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
       </div>
     </section>
   );
-}
+};

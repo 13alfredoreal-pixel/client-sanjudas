@@ -18,15 +18,15 @@ Frontend de la biblioteca digital institucional San Judas Tadeo: login/registro,
 
 ## Stack
 
-| Capa | Tecnología | Ruta |
-|------|------------|------|
-| UI | React 19, Vite 7, Tailwind 4 | `src/` |
-| Routing | React Router 7 | `src/routes/AppRoutes.jsx` |
-| HTTP | Axios (`withCredentials`) | `src/services/apiService.js` |
-| PDF | react-pdf / pdfjs-dist | `src/pages/BookViewerPage.jsx` |
-| Deploy | Firebase Hosting | `firebase.json`, `.firebaserc` |
+| Capa    | Tecnología                   | Ruta                           |
+| ------- | ---------------------------- | ------------------------------ |
+| UI      | React 19, Vite 7, Tailwind 4 | `src/`                         |
+| Routing | React Router 7               | `src/routes/AppRoutes.jsx`     |
+| HTTP    | Axios (`withCredentials`)    | `src/services/apiService.js`   |
+| PDF     | react-pdf / pdfjs-dist       | `src/pages/BookViewerPage.jsx` |
+| Deploy  | Firebase Hosting             | `firebase.json`, `.firebaserc` |
 
-**Gestor de paquetes:** solo **npm**.
+**Gestor de paquetes:** solo **pnpm** (`pnpm install`). No usar npm/yarn.
 
 ## Estructura
 
@@ -49,12 +49,21 @@ Antes de un refactor: leer [docs/CURRENT-STATE.md](docs/CURRENT-STATE.md) (invar
 ## Comandos esenciales
 
 ```bash
-npm install
-npm run dev      # Vite :5173
-npm run build
-npm run lint
-npm run preview
+pnpm install
+pnpm dev           # Vite :5173
+pnpm build
+pnpm lint
+pnpm lint:fix
+pnpm format
+pnpm format:check
+pnpm preview
 ```
+
+### Calidad de código (local)
+
+- **Husky** `pre-commit`: lint-staged (ESLint + Prettier en staged).
+- **Husky** `commit-msg`: Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `ci:`, …).
+- Ejemplo: `fix(api): wire VITE_API_URL`
 
 ## Auth (importante)
 
@@ -79,19 +88,19 @@ Ver [docs/GITHUB-WORKFLOW.md](docs/GITHUB-WORKFLOW.md).
 
 ## Rutas UI
 
-| Path | Acceso |
-|------|--------|
-| `/login` | Público |
-| `/`, `/libro/:id`, `/perfil`, `/ajustes` | Autenticado |
-| `/admin` | `ADMIN_ROLE` |
+| Path                                     | Acceso       |
+| ---------------------------------------- | ------------ |
+| `/login`                                 | Público      |
+| `/`, `/libro/:id`, `/perfil`, `/ajustes` | Autenticado  |
+| `/admin`                                 | `ADMIN_ROLE` |
 
 ## Índice Cursor
 
-| Tipo | Path |
-|------|------|
-| Rules | `.cursor/rules/bsjt-project.mdc`, `react-vite.mdc`, `firebase-hosting.mdc` |
+| Tipo   | Path                                                                                                  |
+| ------ | ----------------------------------------------------------------------------------------------------- |
+| Rules  | `.cursor/rules/bsjt-project.mdc`, `react-vite.mdc`, `firebase-hosting.mdc`                            |
 | Skills | `.cursor/skills/bsjt-react-vite/`, `bsjt-ui-design/`, `bsjt-library-domain/`, `bsjt-github-workflow/` |
-| Docs | `docs/` |
+| Docs   | `docs/`                                                                                               |
 
 Skills en `.agents/skills/` (Firebase): útiles para Hosting; no sustituyen el dominio JWT/Express.
 

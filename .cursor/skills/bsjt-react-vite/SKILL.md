@@ -31,7 +31,7 @@ src/routes/       AppRoutes.jsx
 
 ## Checklist
 
-- [ ] `npm run lint` / `npm run build`
+- [ ] `pnpm lint` / `pnpm build` / `pnpm format:check`
 - [ ] Rutas protegidas correctas
 - [ ] Sin secretos; `withCredentials` si usa cookies
 - [ ] `CURRENT-STATE.md` / `API-CONSUMER.md` si cambió estructura o consumo

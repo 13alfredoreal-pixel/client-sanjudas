@@ -1,5 +1,5 @@
 ---
-description: Convenciones globales BSJT client — workflow, npm, frontera API
+description: Convenciones globales BSJT client — workflow, pnpm, frontera API
 alwaysApply: true
 ---
 
@@ -14,7 +14,7 @@ alwaysApply: true
 
 ## Stack
 
-- **npm** exclusivamente (no pnpm ni yarn).
+- **pnpm** exclusivamente (no npm ni yarn).
 - React 19 + Vite 7 + Tailwind 4.
 - No asumir monorepo ni imports `@shared`.
 
@@ -31,5 +31,6 @@ alwaysApply: true
 - En refactor: preservar invariantes de `docs/CURRENT-STATE.md` y actualizar `docs/API-CONSUMER.md` si cambia el consumo.
 - Sin secretos en el diff; usar `.env.example`.
 - Docs en español; código en inglés.
+- Conventional Commits + Prettier/ESLint (Husky).
 - `docs/ROADMAP.md` es stub hasta nueva redacción — no usarlo como guía.
 - Ver `AGENTS.md`, `docs/API-CONSUMER.md`, `docs/CURRENT-STATE.md`.

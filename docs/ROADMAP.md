@@ -1,10 +1,17 @@
 # ROADMAP (client) — Biblioteca Virtual SJT
 
-> **Estado: PENDIENTE.** Stub. No usarlo como guía de etapas.
+> **Estado: PENDIENTE (stub formal).** No usarlo como guía de etapas de producto.
 >
-> El canónico del producto se redactará en el server: `server-sanJudas/docs/ROADMAP.md`.
+> Canónico del producto (también stub): `server-sanJudas/docs/ROADMAP.md`.
 
-Mientras tanto:
+## Deuda / seguimiento operativo
+
+| Ítem                             | Estado    | Ref      |
+| -------------------------------- | --------- | -------- |
+| ESLint / Prettier / Husky + pnpm | En curso  | BSJT-008 |
+| Alinear client con API `/api/v1` | Pendiente | BSJT-007 |
+
+Fuente de verdad operativa:
 
 - [AGENTS.md](../AGENTS.md)
 - [API-CONSUMER.md](./API-CONSUMER.md)

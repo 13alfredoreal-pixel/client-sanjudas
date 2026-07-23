@@ -1,7 +1,7 @@
-import React from "react";
-import { LoginForm } from "../components/auth/LoginForm";
-import { RegisterForm } from "../components/auth/RegisterForm";
-import { useAuthPage } from "../hooks/useAuthPage";
+import React from 'react';
+import { LoginForm } from '../components/auth/LoginForm';
+import { RegisterForm } from '../components/auth/RegisterForm';
+import { useAuthPage } from '../hooks/useAuthPage';
 
 export const AuthPage = ({ onLoginSuccess }) => {
   const { isLogin, handleToggleForm, handleRegisterSuccess } = useAuthPage();
@@ -15,16 +15,10 @@ export const AuthPage = ({ onLoginSuccess }) => {
   return (
     <>
       {isLogin ? (
-        <LoginForm
-          onToggleForm={handleToggleForm}
-          onLoginSuccess={handleLoginSuccess}
-        />
+        <LoginForm onToggleForm={handleToggleForm} onLoginSuccess={handleLoginSuccess} />
       ) : (
-        <RegisterForm
-          onToggleForm={handleToggleForm}
-          onRegisterSuccess={handleRegisterSuccess}
-        />
+        <RegisterForm onToggleForm={handleToggleForm} onRegisterSuccess={handleRegisterSuccess} />
       )}
     </>
   );
-}
+};

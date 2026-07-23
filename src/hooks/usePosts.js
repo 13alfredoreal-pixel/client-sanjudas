@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { getPosts } from "../services/apiService";
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { getPosts } from '../services/apiService';
 
 /**
  * Custom hook to fetch a paginated list of posts.
@@ -23,10 +23,10 @@ export const usePosts = (page = 1, limit = 10, genre = '', search = '', sort = '
     try {
       // Llama al servicio API pasándole filtros
       const data = await getPosts(page, limit, genre, search, sort);
-      console.log("Data received in usePosts:", data);
+      console.log('Data received in usePosts:', data);
 
       if (data.error) {
-        const msg = data.message || "Error al obtener las publicaciones";
+        const msg = data.message || 'Error al obtener las publicaciones';
         setError(msg);
         toast.error(msg);
       } else if (data.posts) {
@@ -38,7 +38,7 @@ export const usePosts = (page = 1, limit = 10, genre = '', search = '', sort = '
         setPosts(data);
       }
     } catch {
-      const msg = "Error inesperado al cargar el feed";
+      const msg = 'Error inesperado al cargar el feed';
       setError(msg);
       toast.error(msg);
     } finally {

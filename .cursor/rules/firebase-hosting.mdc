@@ -15,7 +15,7 @@ alwaysApply: false
 ## Deploy
 
 ```bash
-npm run build
+pnpm build
 firebase deploy --only hosting
 ```
 
