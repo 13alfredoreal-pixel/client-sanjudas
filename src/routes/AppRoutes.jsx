@@ -1,14 +1,14 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { LibraryPage } from "../pages/LibraryPage";
-import { BookViewerPage } from "../pages/BookViewerPage";
-import { AdminPage } from "../pages/AdminPage";
-import { ProfilePage } from "../pages/ProfilePage";
-import { SettingsPage } from "../pages/SettingsPage";
-import { AuthPage } from "../pages/AuthPage";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { LibraryPage } from '../pages/LibraryPage';
+import { BookViewerPage } from '../pages/BookViewerPage';
+import { AdminPage } from '../pages/AdminPage';
+import { ProfilePage } from '../pages/ProfilePage';
+import { SettingsPage } from '../pages/SettingsPage';
+import { AuthPage } from '../pages/AuthPage';
 
-import { ProtectedRoute } from "../components/auth/ProtectedRoute";
-import { AdminRoute } from "../components/auth/AdminRoute";
+import { ProtectedRoute } from '../components/auth/ProtectedRoute';
+import { AdminRoute } from '../components/auth/AdminRoute';
 
 export const AppRoutes = ({ user, handleLoginSuccess }) => {
   return (
@@ -19,9 +19,11 @@ export const AppRoutes = ({ user, handleLoginSuccess }) => {
         ======================================================
         Cualquiera puede entrar aquí. Si ya tienen sesión, los mandamos al inicio cerrado. 
       */}
-      <Route 
-        path="/login" 
-        element={ user ? <Navigate to="/" replace /> : <AuthPage onLoginSuccess={handleLoginSuccess} /> } 
+      <Route
+        path="/login"
+        element={
+          user ? <Navigate to="/" replace /> : <AuthPage onLoginSuccess={handleLoginSuccess} />
+        }
       />
 
       {/* 
@@ -32,7 +34,6 @@ export const AppRoutes = ({ user, handleLoginSuccess }) => {
         Si 'user' no existe, React Router automáticamente denegará todas las vistas hijas y redireccionará.
       */}
       <Route element={<ProtectedRoute user={user} redirectPath="/login" />}>
-        
         {/* Vistas generales para cualquier usuario autenticado */}
         <Route path="/" element={<LibraryPage user={user} />} />
         <Route path="/libro/:id" element={<BookViewerPage user={user} />} />
@@ -47,7 +48,6 @@ export const AppRoutes = ({ user, handleLoginSuccess }) => {
         <Route element={<AdminRoute user={user} />}>
           <Route path="/admin" element={<AdminPage user={user} />} />
         </Route>
-        
       </Route>
 
       {/* 
@@ -55,7 +55,7 @@ export const AppRoutes = ({ user, handleLoginSuccess }) => {
         🔀 RUTAS DESCONOCIDAS O INEXISTENTES
         ======================================================
       */}
-      <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
+      <Route path="*" element={<Navigate to={user ? '/' : '/login'} replace />} />
     </Routes>
   );
 };

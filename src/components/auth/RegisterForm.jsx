@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useRegister } from "../../hooks/useRegister";
-import logo from "../../assets/img/logo.png";
+import { useState } from 'react';
+import { useRegister } from '../../hooks/useRegister';
+import logo from '../../assets/img/logo.png';
 
 export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    surname: '',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
     profilePicture: null,
   });
 
@@ -18,15 +18,15 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
 
-    if (name === "profilePicture") {
-      setFormData(prev => ({
+    if (name === 'profilePicture') {
+      setFormData((prev) => ({
         ...prev,
-        [name]: files[0] || null
+        [name]: files[0] || null,
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
 
@@ -45,7 +45,7 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
         onRegisterSuccess(result.data.user);
       }
     } else {
-      console.error("Error en registro:", result.error);
+      console.error('Error en registro:', result.error);
     }
   };
 
@@ -55,18 +55,10 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
         <div className="p-8 md:p-12">
           <div className="text-center mb-8">
             <div className="inline-block p-4 bg-white/5 rounded-3xl backdrop-blur-md shadow-inner mb-4 transition-transform hover:scale-110">
-              <img
-                src={logo}
-                alt="Logo"
-                className="w-16 h-16 object-contain"
-              />
+              <img src={logo} alt="Logo" className="w-16 h-16 object-contain" />
             </div>
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              Crea tu cuenta
-            </h2>
-            <p className="mt-2 text-white/60 font-medium">
-              Únete a la comunidad de libros SJT
-            </p>
+            <h2 className="text-3xl font-bold text-white tracking-tight">Crea tu cuenta</h2>
+            <p className="mt-2 text-white/60 font-medium">Únete a la comunidad de libros SJT</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -181,7 +173,9 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
               <div className="flex items-center justify-center w-full">
                 <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-white/10 border-dashed rounded-2xl cursor-pointer bg-white/5 hover:bg-white/10 transition-all">
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <p className="mb-2 text-sm text-white/70"><span className="font-bold">Sube tu foto</span> o arrastra y suelta</p>
+                    <p className="mb-2 text-sm text-white/70">
+                      <span className="font-bold">Sube tu foto</span> o arrastra y suelta
+                    </p>
                     <p className="text-xs text-white/40">PNG, JPG o GIF</p>
                   </div>
                   <input
@@ -201,7 +195,7 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Creando cuenta..." : "Comenzar ahora"}
+              {loading ? 'Creando cuenta...' : 'Comenzar ahora'}
             </button>
 
             <div className="text-center mt-6">
@@ -221,4 +215,4 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
       </div>
     </section>
   );
-}
+};

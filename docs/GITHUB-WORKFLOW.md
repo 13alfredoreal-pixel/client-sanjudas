@@ -6,11 +6,11 @@ Prefijo: **BSJT** (secuencia global compartida con server; issues viven aquí si
 
 ## Nomenclatura
 
-| Elemento | Formato |
-|----------|---------|
-| Issue | `[BSJT-012] Descripción` |
-| Rama | `BSJT-012` |
-| PR | `[BSJT-012] …` + `Closes #12` |
+| Elemento | Formato                       |
+| -------- | ----------------------------- |
+| Issue    | `[BSJT-012] Descripción`      |
+| Rama     | `BSJT-012`                    |
+| PR       | `[BSJT-012] …` + `Closes #12` |
 
 ```bash
 gh issue list --repo 13alfredoreal-pixel/client-sanjudas --state all --limit 30 --json number,title
@@ -42,7 +42,7 @@ git push -u origin BSJT-012
 gh pr create --title "[BSJT-012] …" --body "Closes #N"
 ```
 
-CI: `npm ci` + `lint` + `build`. Sin secretos en el diff.
+CI: `pnpm install --frozen-lockfile` + `lint` + `format:check` + `build`. Sin secretos en el diff.
 
 ## Refs
 

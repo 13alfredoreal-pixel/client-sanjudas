@@ -15,16 +15,16 @@ Helpers: `getImageUrl`, `getPdfUrl`, `getPdfProxyUrl`, `getSignedPdfUrl`.
 
 ## Mapa página → API
 
-| UI | Funciones apiService | Endpoints |
-|----|----------------------|-----------|
-| Auth | `loginUser`, `registerUser` | `/auth/login`, `/auth/register` |
-| Bootstrap sesión | `getProfileService` | `/users/me` |
-| Library | `getBooks`, `getCategoriesService` | `/books`, `/categories` |
-| Viewer | `getBookById`, `getSignedPdfUrl`, `updateReadingProgressService` | `/books/:id`, signed-url, `/users/reading-progress` |
-| Favoritos | `getFavoritesService`, `toggleFavoriteService` | `/users/favorites`, toggle |
-| Reviews | `getReviewsService`, `addReviewService`, `deleteReviewService` | `/reviews` |
-| Profile/Settings | `updateProfileService`, `updatePasswordService` | `/users/update`, `/users/update-password` |
-| Admin | `uploadBook`, `deleteBook`, categories, users, `getAnalyticsService` | books/categories/users/analytics |
+| UI               | Funciones apiService                                                 | Endpoints                                           |
+| ---------------- | -------------------------------------------------------------------- | --------------------------------------------------- |
+| Auth             | `loginUser`, `registerUser`                                          | `/auth/login`, `/auth/register`                     |
+| Bootstrap sesión | `getProfileService`                                                  | `/users/me`                                         |
+| Library          | `getBooks`, `getCategoriesService`                                   | `/books`, `/categories`                             |
+| Viewer           | `getBookById`, `getSignedPdfUrl`, `updateReadingProgressService`     | `/books/:id`, signed-url, `/users/reading-progress` |
+| Favoritos        | `getFavoritesService`, `toggleFavoriteService`                       | `/users/favorites`, toggle                          |
+| Reviews          | `getReviewsService`, `addReviewService`, `deleteReviewService`       | `/reviews`                                          |
+| Profile/Settings | `updateProfileService`, `updatePasswordService`                      | `/users/update`, `/users/update-password`           |
+| Admin            | `uploadBook`, `deleteBook`, categories, users, `getAnalyticsService` | books/categories/users/analytics                    |
 
 ## Auth UX
 

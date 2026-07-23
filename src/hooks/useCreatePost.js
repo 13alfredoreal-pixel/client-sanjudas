@@ -1,6 +1,6 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { createPostService } from "../services/apiService";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { createPostService } from '../services/apiService';
 
 /**
  * Custom hook for creating new posts.
@@ -8,7 +8,7 @@ import { createPostService } from "../services/apiService";
  */
 export const useCreatePost = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   /**
@@ -18,25 +18,24 @@ export const useCreatePost = () => {
    */
   const createPost = async (postData) => {
     setLoading(true);
-    setError("");
+    setError('');
     setSuccess(false);
 
     try {
       const result = await createPostService(postData);
 
       if (result.error) {
-        const msg = result.message || "Error al crear la publicación";
+        const msg = result.message || 'Error al crear la publicación';
         setError(msg);
         toast.error(msg);
         return { success: false, error: msg };
       }
 
       setSuccess(true);
-      toast.success("Publicación creada exitosamente");
+      toast.success('Publicación creada exitosamente');
       return { success: true, data: result };
-
     } catch {
-      const msg = "Error inesperado al crear la publicación";
+      const msg = 'Error inesperado al crear la publicación';
       setError(msg);
       toast.error(msg);
       return { success: false, error: msg };

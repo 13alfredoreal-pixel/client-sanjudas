@@ -1,6 +1,6 @@
 # Current state — client-sanjudas
 
-Inventario **as-is** para refactor. Actualizar cuando cambie la estructura real.
+Inventario **as-is** tras BSJT-008 tooling. Actualizar cuando cambie la estructura real.
 
 ## Layout actual
 
@@ -15,25 +15,33 @@ src/
 public/
 firebase.json
 .firebaserc       → proyecto biblioteca-sjt
+pnpm-lock.yaml
+pnpm-workspace.yaml   # allowBuilds: esbuild
 ```
 
 ## Rutas UI
 
-| Path | Guard |
-|------|--------|
-| `/login` | Público |
-| `/`, `/libro/:id`, `/perfil`, `/ajustes` | `ProtectedRoute` |
-| `/admin` | `AdminRoute` (`ADMIN_ROLE`) |
+| Path                                     | Guard                       |
+| ---------------------------------------- | --------------------------- |
+| `/login`                                 | Público                     |
+| `/`, `/libro/:id`, `/perfil`, `/ajustes` | `ProtectedRoute`            |
+| `/admin`                                 | `AdminRoute` (`ADMIN_ROLE`) |
+
+## Tooling (BSJT-008)
+
+- ESLint + Prettier + Husky (lint-staged / commitlint)
+- CI: `pnpm lint` + `pnpm format:check` + `pnpm build`
+- Gestor: **pnpm** (no npm/yarn)
 
 ## Deuda / leftovers conocidos
 
-| Ítem | Notas |
-|------|-------|
-| `hooks/usePosts.js`, `useCreatePost.js`, `usePostDetail.js` | Legado posts; sin UI activa |
-| `package.json` script `repair` | Apunta a `src/components/posts` (carpeta inexistente) |
-| `apiService.js` `baseURL` | Hardcode a Vercel; `.env.example` define `VITE_API_URL` aún no cableada |
-| Skills `.agents/skills/` Firebase | Genéricos; auth real es JWT Express, no Firebase Auth |
-| Timeout uploads | 120s en Axios (necesario para PDFs grandes) |
+| Ítem                                                        | Notas                                                            |
+| ----------------------------------------------------------- | ---------------------------------------------------------------- |
+| `hooks/usePosts.js`, `useCreatePost.js`, `usePostDetail.js` | Legado posts; sin UI activa → BSJT-007                           |
+| `package.json` script `repair`                              | Apunta a `src/components/posts` (inexistente) → BSJT-007         |
+| `apiService.js` `baseURL`                                   | Hardcode a Vercel; cablear `VITE_API_URL` + `/api/v1` → BSJT-007 |
+| Skills `.agents/skills/` Firebase                           | Genéricos; **auth real es JWT Express**, no Firebase Auth        |
+| Timeout uploads                                             | 120s en Axios (necesario para PDFs grandes)                      |
 
 ## Invariantes a preservar en un refactor
 
@@ -42,12 +50,12 @@ firebase.json
 3. Guards `ProtectedRoute` / `AdminRoute`.
 4. Consumo alineado a [API-CONSUMER.md](./API-CONSUMER.md) / contrato del server.
 5. Firebase Hosting build → `dist/`; rewrite `/api/**` si se mantiene.
-6. npm.
+6. **pnpm** + ESM.
 
 ## Qué puede cambiar libremente (con PR BSJT)
 
 - Estructura folders (features, capas), TypeScript, state management.
-- Sustituir hardcode por `import.meta.env.VITE_API_URL`.
+- Sustituir hardcode por `import.meta.env.VITE_API_URL` + `/api/v1`.
 - Borrar hooks/scripts posts.
 - Design system / Tailwind tokens.
 - Tests, lint stricter, CI.

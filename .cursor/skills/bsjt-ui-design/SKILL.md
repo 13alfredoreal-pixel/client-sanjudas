@@ -9,14 +9,14 @@ description: >-
 
 ## Superficies
 
-| Área | Archivos clave |
-|------|----------------|
-| Nav | `components/layout/LibraryNavbar.jsx` |
-| Auth | `LoginForm`, `RegisterForm`, `AuthPage` |
-| Catálogo | `LibraryPage` + `useLibrary` |
-| Lectura | `BookViewerPage` + `useBookViewer` |
-| Admin | `AdminPage` + `useAdmin` |
-| Reviews | `components/common/ReviewsSection.jsx` |
+| Área     | Archivos clave                          |
+| -------- | --------------------------------------- |
+| Nav      | `components/layout/LibraryNavbar.jsx`   |
+| Auth     | `LoginForm`, `RegisterForm`, `AuthPage` |
+| Catálogo | `LibraryPage` + `useLibrary`            |
+| Lectura  | `BookViewerPage` + `useBookViewer`      |
+| Admin    | `AdminPage` + `useAdmin`                |
+| Reviews  | `components/common/ReviewsSection.jsx`  |
 
 ## Principios
 

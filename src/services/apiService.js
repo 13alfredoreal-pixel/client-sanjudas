@@ -68,7 +68,7 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Interceptor: maneja token expirado y Refresh Token
@@ -76,7 +76,7 @@ let isRefreshing = false;
 let failedQueue = [];
 
 const processQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
+  failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
     } else {
@@ -92,14 +92,20 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
 
     // Si el error es 401 y no es una ruta de autenticación
-    if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url.includes('/auth/')) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes('/auth/')
+    ) {
       if (isRefreshing) {
         return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
-        }).then(token => {
-          originalRequest.headers['Authorization'] = 'Bearer ' + token;
-          return apiClient(originalRequest);
-        }).catch(err => Promise.reject(err));
+        })
+          .then((token) => {
+            originalRequest.headers['Authorization'] = 'Bearer ' + token;
+            return apiClient(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
       }
 
       originalRequest._retry = true;
@@ -130,7 +136,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 // ==================== AUTENTICACIÓN ====================
@@ -159,7 +165,7 @@ export const getProfileService = async () => {
 export const registerUser = async (userData) => {
   try {
     const formData = new FormData();
-    Object.keys(userData).forEach(key => {
+    Object.keys(userData).forEach((key) => {
       if (key === 'profilePicture' && userData[key]) {
         formData.append('profilePicture', userData[key]);
       } else if (userData[key]) {
@@ -191,7 +197,11 @@ export const getBooks = async (category = '', search = '', page = 1, limit = 20)
     const response = await apiClient.get(`/books?${params.toString()}`);
     return response.data;
   } catch (error) {
-    return { error: true, message: error.response?.data?.message || 'Error al obtener libros', books: [] };
+    return {
+      error: true,
+      message: error.response?.data?.message || 'Error al obtener libros',
+      books: [],
+    };
   }
 };
 
@@ -248,7 +258,7 @@ export const getUsersService = async () => {
 export const updateProfileService = async (userData) => {
   try {
     const formData = new FormData();
-    Object.keys(userData).forEach(key => {
+    Object.keys(userData).forEach((key) => {
       if (userData[key] !== null && userData[key] !== undefined) {
         formData.append(key, userData[key]);
       }
@@ -270,7 +280,10 @@ export const updatePasswordService = async (passwords) => {
     const response = await apiClient.patch('/users/update-password', passwords);
     return response.data;
   } catch (error) {
-    return { error: true, message: error.response?.data?.message || 'Error al actualizar contraseña' };
+    return {
+      error: true,
+      message: error.response?.data?.message || 'Error al actualizar contraseña',
+    };
   }
 };
 
@@ -307,7 +320,7 @@ export const getFavoritesService = async () => {
   } catch {
     return { error: true, message: 'Error al obtener favoritos' };
   }
-}
+};
 
 /**
  * toggleFavoriteService: agrega o quita un libro de favoritos.
@@ -319,7 +332,7 @@ export const toggleFavoriteService = async (bookId) => {
   } catch {
     return { error: true, message: 'Error al procesar favorito' };
   }
-}
+};
 
 // ==================== CATEGORÍAS ====================
 
@@ -341,7 +354,7 @@ export const createCategoryService = async (categoryData) => {
       error: true,
       message: error.response?.data?.message || 'Error al crear la categoría',
       serverError: error.response?.data?.error || null,
-      serverStack: error.response?.data?.stack || null
+      serverStack: error.response?.data?.stack || null,
     };
   }
 };
@@ -351,7 +364,10 @@ export const deleteCategoryService = async (id) => {
     const response = await apiClient.delete(`/categories/${id}`);
     return response.data;
   } catch (error) {
-    return { error: true, message: error.response?.data?.message || 'Error al eliminar la categoría' };
+    return {
+      error: true,
+      message: error.response?.data?.message || 'Error al eliminar la categoría',
+    };
   }
 };
 

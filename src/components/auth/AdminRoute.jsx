@@ -14,6 +14,6 @@ export const AdminRoute = ({ user, redirectPath = '/' }) => {
     toast.error('Acceso denegado: Se requieren permisos de administrador');
     return <Navigate to={redirectPath} replace />;
   }
-  
+
   return <Outlet />;
 };

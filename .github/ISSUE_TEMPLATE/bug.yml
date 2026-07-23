@@ -1,6 +1,6 @@
 name: Bug
 description: Comportamiento incorrecto o error (UI)
-title: "[BSJT-???] "
+title: '[BSJT-???] '
 labels:
   - bug
 body:

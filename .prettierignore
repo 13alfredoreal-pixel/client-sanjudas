@@ -1,0 +1,7 @@
+dist
+node_modules
+coverage
+.firebase
+package-lock.json
+*.min.js
+public

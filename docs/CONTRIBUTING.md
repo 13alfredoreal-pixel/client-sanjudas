@@ -10,10 +10,11 @@
 ## Local
 
 ```bash
-npm install
-npm run dev
-npm run lint
-npm run build
+pnpm install
+pnpm dev
+pnpm lint
+pnpm format:check
+pnpm build
 ```
 
 ## PR
@@ -26,8 +27,11 @@ npm run build
 
 ## Estilo
 
-- npm only
+- **pnpm** only
 - Docs ES / código EN
 - Preferir cambios acotados; refactor amplio solo con pedido explícito + invariantes
+- **ESLint** + **Prettier** (ver `eslint.config.js`, `.prettierrc.json`)
+- Commits: **Conventional Commits** (Husky `commit-msg`). Ej.: `fix(auth): call logout endpoint`
+- Antes de push: `pnpm lint && pnpm format:check`
 
 Detalle: [GITHUB-WORKFLOW.md](./GITHUB-WORKFLOW.md).

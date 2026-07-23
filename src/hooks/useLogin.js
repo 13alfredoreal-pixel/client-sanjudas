@@ -49,7 +49,6 @@ export const useLogin = () => {
 
       toast.success('¡Bienvenido de vuelta!');
       return { success: true, data: { userDetails } };
-
     } catch {
       const errorMessage = 'Error inesperado al iniciar sesión';
       setError(errorMessage);
@@ -67,6 +66,6 @@ export const useLogin = () => {
     login,
     loading,
     error,
-    clearError
+    clearError,
   };
 };

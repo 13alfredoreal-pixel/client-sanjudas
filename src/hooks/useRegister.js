@@ -52,7 +52,6 @@ export const useRegister = () => {
 
       toast.success('¡Registro exitoso! Bienvenido a la comunidad de libros SJT!');
       return { success: true, data: result };
-
     } catch {
       const errorMessage = 'Error inesperado al registrar el usuario';
       setError(errorMessage);
@@ -69,6 +68,6 @@ export const useRegister = () => {
     register,
     loading,
     error,
-    clearError
+    clearError,
   };
 };

@@ -32,7 +32,9 @@ Closes #12
 
 ## Checklist
 
-- [ ] `npm run lint` y `npm run build` OK
+- [ ] `pnpm lint` y `pnpm build` OK
+- [ ] `pnpm format:check` OK
+
 - [ ] Sin secretos ni `.env` en el diff
 - [ ] `docs/API-CONSUMER.md` actualizado si cambió el consumo de API
 - [ ] `docs/CURRENT-STATE.md` / `AGENTS.md` si cambió la estructura
