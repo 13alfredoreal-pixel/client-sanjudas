@@ -1,61 +1,65 @@
 import axios from 'axios';
 
+/**
+ * Local: VITE_API_URL=http://localhost:3000/api/v1
+ * Prod (Firebase same-origin rewrite): VITE_API_URL=/api/v1
+ */
+const apiBaseUrl = import.meta.env.VITE_API_URL || '/api/v1';
+
 const apiClient = axios.create({
-  baseURL: 'https://base-rho-lyart.vercel.app/api', // Usa el proxy de Vite para desarrollo local
-  timeout: 120000, // 120s para subidas de PDF grandes
-  withCredentials: true, // Necesario para enviar cookies seguras HttpOnly
+  baseURL: apiBaseUrl,
+  timeout: 120000,
+  withCredentials: true,
 });
 
-export const UPLOADS_URL = `https://base-rho-lyart.vercel.app/api/uploads/`;
-
 /**
- * getImageUrl: Retorna la URL completa de una imagen subida al servidor.
- * @param {string} imageName - El nombre del archivo almacenado.
- * @returns {string} URL completa o null si no hay imagen.
+ * Avatares/portadas: solo URLs absolutas (Cloudinary). Sin /api/uploads legacy.
  */
 export const getImageUrl = (imageName) => {
   if (!imageName) return null;
-  if (imageName.startsWith('http')) return imageName;
-  return `${UPLOADS_URL}${imageName}`;
+  if (imageName.startsWith('http://') || imageName.startsWith('https://')) return imageName;
+  return null;
 };
 
 /**
- * getPdfUrl: Retorna la URL completa de un PDF subido al servidor.
- * @param {string} pdfUrl - La URL del PDF (puede venir con localhost).
- * @returns {string} URL completa con el backend correcto.
- */
-export const getPdfUrl = (pdfUrl) => {
-  if (!pdfUrl) return null;
-  if (pdfUrl.startsWith('http')) {
-    return pdfUrl
-      .replace('http://localhost:5173', 'https://base-rho-lyart.vercel.app')
-      .replace('http://localhost:3000', 'https://base-rho-lyart.vercel.app')
-      .replace('http://127.0.0.1:5173', 'https://base-rho-lyart.vercel.app');
-  }
-  return pdfUrl;
-};
-
-/**
- * getPdfProxyUrl: Retorna la URL del endpoint proxy para obtener un PDF
- * @param {string} bookId - El ID del libro
- * @returns {string} URL del endpoint proxy
+ * URL del proxy PDF autenticado (mismo origin / baseURL).
  */
 export const getPdfProxyUrl = (bookId) => {
   if (!bookId) return null;
-  return `${apiClient.defaults.baseURL}/books/${bookId}/pdf`;
+  const base = apiClient.defaults.baseURL?.replace(/\/$/, '') || '';
+  return `${base}/books/${bookId}/pdf`;
 };
+
 /**
- * getSignedPdfUrl: Obtiene una URL firmada temporal del servidor
- * @param {string} bookId - El ID del libro
- * @returns {Promise<string>} URL firmada del PDF
+ * Obtiene URL firmada temporal del PDF (Supabase o legacy).
+ * @returns {Promise<{ signedUrl?: string, error?: boolean, message?: string }>}
  */
 export const getSignedPdfUrl = async (bookId) => {
   try {
     const response = await apiClient.get(`/books/${bookId}/signed-url`);
-    return response.data.signedUrl;
+    const signedUrl = response.data?.signedUrl;
+    if (!signedUrl) {
+      return { error: true, message: 'El servidor no devolvió una URL firmada del PDF' };
+    }
+    return { signedUrl };
   } catch (error) {
     console.error('Error getting signed PDF URL:', error);
-    return null;
+    return {
+      error: true,
+      message: error.response?.data?.message || 'No se pudo obtener el PDF firmado',
+    };
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    await apiClient.post('/auth/logout', {}, { withCredentials: true });
+    return { success: true };
+  } catch (error) {
+    return {
+      error: true,
+      message: error.response?.data?.message || 'Error al cerrar sesión',
+    };
   }
 };
 

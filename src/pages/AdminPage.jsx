@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '../hooks/useAdmin';
 import { FaUsers, FaBook, FaComment, FaBolt, FaHistory } from 'react-icons/fa';
-import { getImageUrl, getPdfUrl } from '../services/apiService';
+import { getImageUrl, getSignedPdfUrl } from '../services/apiService';
+import toast from 'react-hot-toast';
 
 /**
  * AdminPage: panel de administración de la biblioteca.
@@ -54,6 +55,15 @@ export const AdminPage = ({ user }) => {
     handleCreateCategory,
     handleDeleteCategory,
   } = useAdmin(user);
+
+  const openBookPdf = async (bookId) => {
+    const result = await getSignedPdfUrl(bookId);
+    if (result.error || !result.signedUrl) {
+      toast.error(result.message || 'No se pudo abrir el PDF');
+      return;
+    }
+    window.open(result.signedUrl, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="min-h-screen p-8 box-border max-w-[1100px] mx-auto">
@@ -445,14 +455,13 @@ export const AdminPage = ({ user }) => {
 
                   {/* Acciones */}
                   <div className="flex gap-2 shrink-0">
-                    <a
-                      href={getPdfUrl(book.pdfUrl)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-blue-500/10 border border-blue-500/30 text-blue-300 rounded-xl px-3 py-1.5 no-underline text-xs font-semibold whitespace-nowrap hover:bg-blue-500/20 transition-colors"
+                    <button
+                      type="button"
+                      onClick={() => openBookPdf(book._id)}
+                      className="bg-blue-500/10 border border-blue-500/30 text-blue-300 rounded-xl px-3 py-1.5 text-xs font-semibold whitespace-nowrap hover:bg-blue-500/20 transition-colors cursor-pointer font-inherit"
                     >
                       Ver PDF
-                    </a>
+                    </button>
                     <button
                       onClick={() => handleDelete(book)}
                       disabled={deleting === book._id}

@@ -28,24 +28,23 @@ React 19 · Vite 7 · Tailwind CSS 4 · React Router 7 · Axios · react-pdf · 
 ## Quickstart
 
 ```bash
-cp .env.example .env   # opcional; ver nota de API URL abajo
+cp .env.example .env   # VITE_API_URL=http://localhost:3000/api/v1
 pnpm install
 pnpm dev
 ```
 
 Abre `http://localhost:5173`.
 
-Para API local, arranca también server-sanJudas (`pnpm dev`).
+Para API local, arranca también server-sanJudas (`pnpm dev` en `:3000`).
 
 ### API URL
 
-Hoy `src/services/apiService.js` apunta por defecto a producción Vercel. Para local:
+`src/services/apiService.js` usa `import.meta.env.VITE_API_URL` (canónico `/api/v1`).
 
-1. Define `VITE_API_URL=http://localhost:3000/api` en `.env` **y**
-2. Usa esa variable en `apiService` (deuda documentada en [docs/CURRENT-STATE.md](./docs/CURRENT-STATE.md)), **o**
-3. Apunta temporalmente el `baseURL` al server local.
+- Local: `http://localhost:3000/api/v1`
+- Prod: `/api/v1` + rewrite Firebase → Vercel
 
-CORS del server ya permite `localhost:5173`.
+CORS del server permite `localhost:5173`.
 
 ## Scripts
 

@@ -6,6 +6,7 @@ import {
   addReviewService,
   deleteReviewService,
   getSignedPdfUrl,
+  getProfileService,
 } from '../services/apiService';
 import { pdfjs } from 'react-pdf';
 
@@ -46,27 +47,53 @@ export const useBookViewer = (id, user) => {
 
   const fetchBook = useCallback(async () => {
     setLoading(true);
+    setError('');
     const data = await getBookById(id);
     if (data.error) {
       setError(data.message);
+      setLoading(false);
+      return;
+    }
+
+    setBook(data.book);
+
+    const signed = await getSignedPdfUrl(id);
+    if (signed.error || !signed.signedUrl) {
+      setError(signed.message || 'No se pudo cargar el PDF');
+      setPdfUrl(null);
     } else {
-      setBook(data.book);
-      // Obtener URL firmada del PDF
-      const signedUrl = await getSignedPdfUrl(id);
-      setPdfUrl(signedUrl);
-      // Cargar reseñas
-      const revData = await getReviewsService(id);
-      if (!revData.error) {
-        setReviews(revData.reviews || []);
-        if (user) {
-          const uid = user.uid || user.id || user._id;
-          const existing = (revData.reviews || []).find(
-            (r) => (r.user?._id === uid || r.user === uid) && uid,
-          );
-          if (existing) setHasReviewed(true);
+      setPdfUrl(signed.signedUrl);
+    }
+
+    // Restaurar progreso de lectura desde el perfil
+    if (user && user.role !== 'ADMIN_ROLE') {
+      try {
+        const profile = await getProfileService();
+        const progressList = profile?.user?.readingProgress || profile?.readingProgress || [];
+        const entry = progressList.find((p) => {
+          const bookRef = p.book?._id || p.book;
+          return bookRef && String(bookRef) === String(id);
+        });
+        if (entry?.lastPage && entry.lastPage > 1) {
+          setPageNumber(entry.lastPage);
         }
+      } catch (err) {
+        console.error('Error restoring reading progress', err);
       }
     }
+
+    const revData = await getReviewsService(id);
+    if (!revData.error) {
+      setReviews(revData.reviews || []);
+      if (user) {
+        const uid = user.uid || user.id || user._id;
+        const existing = (revData.reviews || []).find(
+          (r) => (r.user?._id === uid || r.user === uid) && uid,
+        );
+        if (existing) setHasReviewed(true);
+      }
+    }
+
     setLoading(false);
   }, [id, user]);
 

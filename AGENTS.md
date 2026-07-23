@@ -36,12 +36,12 @@ src/
   components/    auth, layout, ui, common
   hooks/         useLibrary, useLogin, useAdmin, …
   routes/        AppRoutes.jsx
-  services/      apiService.js
+  services/      apiService.js   → VITE_API_URL (/api/v1)
 public/
 docs/
 .cursor/rules/
 .cursor/skills/
-.agents/skills/  → skills Firebase genéricos (sobre todo Hosting)
+.agents/skills/  → skills Firebase genéricos (Hosting); auth app = JWT
 ```
 
 Antes de un refactor: leer [docs/CURRENT-STATE.md](docs/CURRENT-STATE.md) (invariantes + deuda).
@@ -62,20 +62,21 @@ pnpm preview
 ### Calidad de código (local)
 
 - **Husky** `pre-commit`: lint-staged (ESLint + Prettier en staged).
-- **Husky** `commit-msg`: Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `ci:`, …).
+- **Husky** `commit-msg`: Conventional Commits.
 - Ejemplo: `fix(api): wire VITE_API_URL`
 
 ## Auth (importante)
 
 - **No** uses Firebase Auth para sesión de app.
 - Access token en `localStorage` (`token`); refresh vía cookie HttpOnly contra la API.
+- Logout: `POST /api/v1/auth/logout` + limpiar storage.
 - Rutas: `ProtectedRoute` / `AdminRoute` (`ADMIN_ROLE`).
 
 ## Reglas de frontera
 
-- El client **solo** habla con la API REST (`/api`).
+- El client **solo** habla con la API REST bajo **`/api/v1`**.
 - Nunca Mongo, Cloudinary SDK ni secretos de Vercel en el browser.
-- Base URL: hoy hardcodeada en `apiService.js` a Vercel; preferir `import.meta.env.VITE_API_URL` (ver `.env.example`).
+- Base URL: `import.meta.env.VITE_API_URL` (ver `.env.example`). Local `http://localhost:3000/api/v1`; prod relativo `/api/v1` + rewrite Firebase.
 
 ## Workflow BSJT (obligatorio)
 

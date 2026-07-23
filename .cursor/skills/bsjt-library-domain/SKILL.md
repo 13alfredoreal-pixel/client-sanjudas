@@ -10,30 +10,31 @@ description: >-
 
 ## Canon
 
-Modelos y endpoints: repo **server** → `docs/API-CONTRACT.md` y skill `bsjt-library-domain` del server.  
-As-is UI: `docs/CURRENT-STATE.md`. ROADMAP: stub pendiente.
+Modelos y endpoints: repo **server** → `docs/API-CONTRACT.md` (prefijo **`/api/v1`**).  
+As-is UI: `docs/CURRENT-STATE.md`.
 
 Este skill cubre solo el **mapeo UI**.
 
 ## Flujos usuario
 
-| Flujo          | UI               | API (vía apiService)                           |
-| -------------- | ---------------- | ---------------------------------------------- |
-| Login/registro | AuthPage         | `/auth/login`, `/auth/register`                |
-| Catálogo       | LibraryPage      | `/books`, `/categories`                        |
-| Leer libro     | BookViewerPage   | `/books/:id`, pdf/signed-url, reading-progress |
-| Favoritos      | Library/Profile  | `/users/favorites`, toggle-favorite            |
-| Reviews        | ReviewsSection   | `/reviews`                                     |
-| Perfil/ajustes | Profile/Settings | `/users/me`, update, password                  |
+| Flujo                 | UI               | API (vía apiService bajo /api/v1)                                        |
+| --------------------- | ---------------- | ------------------------------------------------------------------------ |
+| Login/registro/logout | AuthPage         | `/auth/login`, `/auth/register`, `/auth/logout`                          |
+| Catálogo              | LibraryPage      | `/books`, `/categories`                                                  |
+| Leer libro            | BookViewerPage   | `/books/:id`, signed-url, reading-progress (+ restore desde `/users/me`) |
+| Favoritos             | Library/Profile  | `/users/favorites`, toggle-favorite                                      |
+| Reviews               | ReviewsSection   | `/reviews`                                                               |
+| Perfil/ajustes        | Profile/Settings | `/users/me`, update, password                                            |
 
 ## Flujos admin
 
-| Flujo              | UI        | API                       |
-| ------------------ | --------- | ------------------------- |
-| Subir/borrar libro | AdminPage | POST/DELETE `/books`      |
-| Categorías         | AdminPage | POST/DELETE `/categories` |
-| Usuarios           | AdminPage | promote, delete, list     |
-| Stats              | AdminPage | `/analytics`              |
+| Flujo              | UI        | API                            |
+| ------------------ | --------- | ------------------------------ |
+| Subir/borrar libro | AdminPage | POST/DELETE `/books`           |
+| Ver PDF            | AdminPage | signed-url (no `pdfUrl` vacío) |
+| Categorías         | AdminPage | POST/DELETE `/categories`      |
+| Usuarios           | AdminPage | promote, delete, list          |
+| Stats              | AdminPage | `/analytics`                   |
 
 ## Roles
 
