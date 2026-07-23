@@ -1,6 +1,6 @@
 # Current state — client-sanjudas
 
-Inventario **as-is** tras BSJT-008 (pnpm/tooling) + BSJT-007 (alineación API).
+Inventario **as-is** tras BSJT-007/008/010.
 
 ## Layout actual
 
@@ -11,10 +11,16 @@ src/
   hooks/          useLibrary, useLogin, useAdmin, useBookViewer, …
   routes/         AppRoutes.jsx
   services/       apiService.js  → VITE_API_URL (/api/v1)
+  assets/img/     logo.png (favicon + navbar + auth)
 public/
 firebase.json     rewrite /api/** → Vercel + SPA fallback
 pnpm-lock.yaml
 ```
+
+## Branding
+
+- Nombre de producto: **Biblioteca Virtual SJT**
+- Marca visual: `src/assets/img/logo.png` (pestaña, navbar, login/register)
 
 ## Tooling
 
