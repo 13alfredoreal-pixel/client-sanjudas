@@ -1,6 +1,6 @@
 # Current state — client-sanjudas
 
-Inventario **as-is** tras BSJT-008 tooling. Actualizar cuando cambie la estructura real.
+Inventario **as-is** tras BSJT-008 (pnpm/tooling) + BSJT-007 (alineación API).
 
 ## Layout actual
 
@@ -10,54 +10,33 @@ src/
   components/     auth, layout, ui, common
   hooks/          useLibrary, useLogin, useAdmin, useBookViewer, …
   routes/         AppRoutes.jsx
-  services/       apiService.js
-  assets/img/
+  services/       apiService.js  → VITE_API_URL (/api/v1)
 public/
-firebase.json
-.firebaserc       → proyecto biblioteca-sjt
+firebase.json     rewrite /api/** → Vercel + SPA fallback
 pnpm-lock.yaml
-pnpm-workspace.yaml   # allowBuilds: esbuild
 ```
 
-## Rutas UI
+## Tooling
 
-| Path                                     | Guard                       |
-| ---------------------------------------- | --------------------------- |
-| `/login`                                 | Público                     |
-| `/`, `/libro/:id`, `/perfil`, `/ajustes` | `ProtectedRoute`            |
-| `/admin`                                 | `AdminRoute` (`ADMIN_ROLE`) |
+- pnpm + ESLint + Prettier + Husky (lint-staged / commitlint)
+- CI: lint + format:check + build
 
-## Tooling (BSJT-008)
+## Invariantes
 
-- ESLint + Prettier + Husky (lint-staged / commitlint)
-- CI: `pnpm lint` + `pnpm format:check` + `pnpm build`
-- Gestor: **pnpm** (no npm/yarn)
-
-## Deuda / leftovers conocidos
-
-| Ítem                                                        | Notas                                                            |
-| ----------------------------------------------------------- | ---------------------------------------------------------------- |
-| `hooks/usePosts.js`, `useCreatePost.js`, `usePostDetail.js` | Legado posts; sin UI activa → BSJT-007                           |
-| `package.json` script `repair`                              | Apunta a `src/components/posts` (inexistente) → BSJT-007         |
-| `apiService.js` `baseURL`                                   | Hardcode a Vercel; cablear `VITE_API_URL` + `/api/v1` → BSJT-007 |
-| Skills `.agents/skills/` Firebase                           | Genéricos; **auth real es JWT Express**, no Firebase Auth        |
-| Timeout uploads                                             | 120s en Axios (necesario para PDFs grandes)                      |
-
-## Invariantes a preservar en un refactor
-
-1. Frontera: solo HTTP vía `apiService` (o sucesor); sin Mongo/Cloudinary en browser.
-2. Auth: access en `localStorage` + refresh cookie (`withCredentials`); no Firebase Auth de sesión.
+1. Frontera: solo HTTP vía `apiService`; sin Mongo/Cloudinary SDK en browser.
+2. Auth: access `localStorage` + refresh cookie; logout llama API; **no** Firebase Auth de sesión.
 3. Guards `ProtectedRoute` / `AdminRoute`.
-4. Consumo alineado a [API-CONSUMER.md](./API-CONSUMER.md) / contrato del server.
-5. Firebase Hosting build → `dist/`; rewrite `/api/**` si se mantiene.
-6. **pnpm** + ESM.
+4. Prefijo API canónico **`/api/v1`** (contrato server).
+5. PDFs: signed-url / proxy; avatares = URL Cloudinary absoluta.
+6. Firebase Hosting `dist/` + rewrite `/api/**`.
+7. **pnpm** only.
 
-## Qué puede cambiar libremente (con PR BSJT)
+## Deuda restante
 
-- Estructura folders (features, capas), TypeScript, state management.
-- Sustituir hardcode por `import.meta.env.VITE_API_URL` + `/api/v1`.
-- Borrar hooks/scripts posts.
-- Design system / Tailwind tokens.
-- Tests, lint stricter, CI.
+| Ítem                              | Notas                   |
+| --------------------------------- | ----------------------- |
+| Skills `.agents/skills/` Firebase | Ruido; auth real es JWT |
+| Deploy Vercel server              | Aplazado en server      |
+| Worker PDF unpkg                  | CDN externo             |
 
-Tras cambios de rutas o contrato de consumo, actualizar `AGENTS.md`, rules/skills y este documento.
+Auth real = JWT Express (skills Firebase no sustituyen el dominio).
