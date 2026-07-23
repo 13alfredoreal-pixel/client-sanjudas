@@ -1,0 +1,26 @@
+---
+description: Firebase Hosting — build dist, rewrites /api, proyecto biblioteca-sjt
+globs: firebase.json,.firebaserc,vite.config.js
+alwaysApply: false
+---
+
+# Firebase Hosting
+
+## Proyecto
+
+- `.firebaserc` → `biblioteca-sjt`
+- `firebase.json` → `public: dist`
+- Rewrite `/api/**` → API Vercel (`base-rho-lyart.vercel.app`)
+
+## Deploy
+
+```bash
+npm run build
+firebase deploy --only hosting
+```
+
+## Notas
+
+- Auth de app **no** es Firebase Auth.
+- Skills en `.agents/skills/firebase-*` ayudan con Hosting; no cambian el dominio JWT.
+- Si cambia la URL de API, actualizar rewrite y `apiService` / `VITE_API_URL`.

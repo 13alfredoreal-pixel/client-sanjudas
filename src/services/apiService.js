@@ -151,7 +151,7 @@ export const getProfileService = async () => {
   try {
     const response = await apiClient.get('/users/me');
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener el perfil de usuario' };
   }
 };
@@ -240,7 +240,7 @@ export const getUsersService = async () => {
   try {
     const response = await apiClient.get('/users');
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener usuarios' };
   }
 };
@@ -304,7 +304,7 @@ export const getFavoritesService = async () => {
   try {
     const response = await apiClient.get('/users/favorites');
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener favoritos' };
   }
 }
@@ -316,7 +316,7 @@ export const toggleFavoriteService = async (bookId) => {
   try {
     const response = await apiClient.post(`/users/toggle-favorite/${bookId}`);
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al procesar favorito' };
   }
 }
@@ -327,7 +327,7 @@ export const getCategoriesService = async () => {
   try {
     const response = await apiClient.get('/categories');
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener categorías', categories: [] };
   }
 };
@@ -361,7 +361,7 @@ export const getReviewsService = async (bookId) => {
   try {
     const response = await apiClient.get(`/reviews/book/${bookId}`);
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener reseñas', reviews: [] };
   }
 };
@@ -390,7 +390,7 @@ export const getAnalyticsService = async () => {
   try {
     const response = await apiClient.get('/analytics');
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al obtener analíticas' };
   }
 };
@@ -401,7 +401,7 @@ export const updateReadingProgressService = async (bookId, page) => {
   try {
     const response = await apiClient.patch('/users/reading-progress', { bookId, page });
     return response.data;
-  } catch (error) {
+  } catch {
     return { error: true, message: 'Error al actualizar progreso' };
   }
 };

@@ -32,7 +32,7 @@ export const AdminPage = ({ user }) => {
     const {
         books, loading, uploading, deleting, allUsers, promoting,
         categories, creatingCategory, categoryForm, setCategoryForm,
-        analytics, form, setForm, pdfFile, setPdfFile,
+        analytics, form, pdfFile, setPdfFile,
         coverFile, setCoverFile, handleFormChange, handleSubmit,
         handleDelete, handlePromote, handleDeleteUser,
         handleCreateCategory, handleDeleteCategory

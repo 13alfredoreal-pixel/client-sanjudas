@@ -14,7 +14,7 @@ const COVER_COLORS = [
 export const LibraryPage = ({ user }) => {
     const {
         books, favorites, loading, category, setCategory,
-        search, searchInput, setSearchInput, page, totalPages, loadingMore,
+        search, setSearch, searchInput, setSearchInput, page, totalPages, loadingMore,
         handleSearch, handleLoadMore, handleToggleFavorite, displayCategories,
         categoryIcons, stats, navigate
     } = useLibrary(user);
@@ -183,7 +183,7 @@ const StatCard = ({ icon, label, value, color }) => (
     </div>
 );
 
-const BookCard = ({ book, index, colorGradient, onClick, isFeatured, isFavorite, onToggleFavorite, categoryIcons }) => {
+const BookCard = ({ book, index, colorGradient, onClick, isFavorite, onToggleFavorite, categoryIcons }) => {
     return (
         <div
             className={`glass-card animate-fade-in-up stagger-${(index % 6) + 1} flex flex-col h-full cursor-pointer border border-white/5 transition-all duration-300`}

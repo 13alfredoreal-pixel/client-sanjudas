@@ -1,0 +1,33 @@
+# Contributing — client-sanjudas
+
+## Antes de codear
+
+1. Leer [AGENTS.md](../AGENTS.md) y [CURRENT-STATE.md](./CURRENT-STATE.md).
+2. Issue `[BSJT-XXX]` + rama `BSJT-XXX`.
+3. Si consume API → [API-CONSUMER.md](./API-CONSUMER.md) y contrato del server.
+4. [ROADMAP.md](./ROADMAP.md) está **pendiente** — no bloquear por etapas B*.
+
+## Local
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+## PR
+
+- Título `[BSJT-XXX] …`
+- `Closes #N`
+- Template `.github/PULL_REQUEST_TEMPLATE.md`
+- CI verde
+- Si hubo refactor de estructura: actualizar `CURRENT-STATE.md` / `AGENTS.md`
+
+## Estilo
+
+- npm only
+- Docs ES / código EN
+- Preferir cambios acotados; refactor amplio solo con pedido explícito + invariantes
+
+Detalle: [GITHUB-WORKFLOW.md](./GITHUB-WORKFLOW.md).

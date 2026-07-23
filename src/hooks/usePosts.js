@@ -37,7 +37,7 @@ export const usePosts = (page = 1, limit = 10, genre = '', search = '', sort = '
       } else if (Array.isArray(data)) {
         setPosts(data);
       }
-    } catch (err) {
+    } catch {
       const msg = "Error inesperado al cargar el feed";
       setError(msg);
       toast.error(msg);

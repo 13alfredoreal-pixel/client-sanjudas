@@ -123,7 +123,7 @@ export const useLibrary = (user) => {
 
     return {
         books, favorites, dbCategories, loading, category, setCategory,
-        search, searchInput, setSearchInput, page, totalPages, loadingMore,
+        search, setSearch, searchInput, setSearchInput, page, totalPages, loadingMore,
         handleSearch, handleLoadMore, handleToggleFavorite, displayCategories,
         categoryIcons, stats, navigate
     };

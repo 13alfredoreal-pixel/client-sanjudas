@@ -1,5 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+
+# Environment / secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+*.local
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +20,26 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Firebase local cache (keep firebase.json / .firebaserc)
+.firebase/
 
-# Editor directories and files
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Coverage / tests
+coverage/
+
+# Optional tooling
+.turbo/
+*.tsbuildinfo

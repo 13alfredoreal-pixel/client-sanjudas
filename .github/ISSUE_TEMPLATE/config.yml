@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Estado as-is / deuda
+    url: https://github.com/13alfredoreal-pixel/client-sanjudas/blob/main/docs/CURRENT-STATE.md
+    about: Inventario e invariantes para refactor
+  - name: API Consumer
+    url: https://github.com/13alfredoreal-pixel/client-sanjudas/blob/main/docs/API-CONSUMER.md
+    about: Cómo el SPA consume la API
+  - name: Repo API
+    url: https://github.com/13alfredoreal-pixel/server-sanJudas
+    about: Issues de backend van en server-sanJudas

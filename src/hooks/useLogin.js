@@ -50,7 +50,7 @@ export const useLogin = () => {
       toast.success('¡Bienvenido de vuelta!');
       return { success: true, data: { userDetails } };
 
-    } catch (err) {
+    } catch {
       const errorMessage = 'Error inesperado al iniciar sesión';
       setError(errorMessage);
       toast.error(errorMessage);
