@@ -27,7 +27,7 @@ export const usePostDetail = (id) => {
       } else {
         setPost(data.post);
       }
-    } catch (err) {
+    } catch {
       const msg = "Error al cargar el post";
       setError(msg);
       toast.error(msg);

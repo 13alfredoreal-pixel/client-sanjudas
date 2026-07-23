@@ -35,7 +35,7 @@ export const useCreatePost = () => {
       toast.success("Publicación creada exitosamente");
       return { success: true, data: result };
 
-    } catch (err) {
+    } catch {
       const msg = "Error inesperado al crear la publicación";
       setError(msg);
       toast.error(msg);

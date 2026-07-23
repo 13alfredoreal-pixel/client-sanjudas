@@ -116,7 +116,7 @@ export const useSettings = () => {
             } else {
                 toast.error(response.message || 'Error al actualizar contraseña');
             }
-        } catch (error) {
+        } catch {
             toast.error('Error de conexión');
         } finally {
             setLoading(false);
