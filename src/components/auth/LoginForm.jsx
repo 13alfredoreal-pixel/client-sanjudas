@@ -40,10 +40,10 @@ export const LoginForm = ({ onToggleForm, onLoginSuccess }) => {
         <div className="p-8 md:p-12">
           <div className="text-center mb-10">
             <div className="inline-block p-4 bg-white/5 rounded-3xl backdrop-blur-md shadow-inner mb-6 transition-transform hover:scale-110">
-              <img src={logo} alt="Logo" className="w-20 h-20 object-contain" />
+              <img src={logo} alt="Biblioteca Virtual SJT" className="w-20 h-20 object-contain" />
             </div>
             <h2 className="text-3xl font-bold text-white tracking-tight">Bienvenido de nuevo</h2>
-            <p className="mt-2 text-white/60 font-medium">Biblioteca Digital Escolar</p>
+            <p className="mt-2 text-white/60 font-medium">Biblioteca Virtual SJT</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

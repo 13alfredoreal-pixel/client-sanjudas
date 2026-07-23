@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { getImageUrl } from '../../services/apiService';
+import logo from '../../assets/img/logo.png';
 
 /**
  * LibraryNavbar: barra de navegación principal de la Biblioteca Digital.
@@ -14,12 +15,14 @@ export const LibraryNavbar = ({ user, onLogout }) => {
     <nav className="sticky top-0 z-[100] w-full py-3 px-8 flex items-center justify-between border-b border-white/10 box-border bg-slate-900/40 backdrop-blur-[20px] saturate-[180%] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_10px_15px_-3px_rgba(0,0,0,0.2),inset_0_0_0_1px_rgba(255,255,255,0.05)]">
       {/* SECCIÓN DEL LOGO: Regresa al catálogo principal */}
       <Link to="/" className="flex items-center gap-3 no-underline">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(139,92,246,0.4)]">
-          📚
-        </div>
+        <img
+          src={logo}
+          alt="Biblioteca Virtual SJT"
+          className="w-10 h-10 rounded-full object-cover shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+        />
         <div>
-          <p className="m-0 font-bold text-base text-slate-50">Web Institucional</p>
-          <p className="m-0 text-[0.65rem] text-slate-400 tracking-[0.1em]">SISTEMA INTEGRAL</p>
+          <p className="m-0 font-bold text-base text-slate-50">Biblioteca Virtual SJT</p>
+          <p className="m-0 text-[0.65rem] text-slate-400 tracking-[0.1em]">SAN JUDAS TADEO</p>
         </div>
       </Link>
 
