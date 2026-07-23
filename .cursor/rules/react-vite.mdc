@@ -1,0 +1,32 @@
+---
+description: Convenciones React/Vite — pages, hooks, rutas, apiService
+globs: src/**/*
+alwaysApply: false
+---
+
+# React + Vite
+
+## Organización
+
+- Páginas en `src/pages/`; lógica reutilizable en `src/hooks/`.
+- Componentes por área: `components/auth`, `layout`, `ui`, `common`.
+- Llamadas HTTP **solo** vía `src/services/apiService.js`.
+
+## Rutas
+
+- Definir en `src/routes/AppRoutes.jsx`.
+- Privadas: envolver con `ProtectedRoute`; admin con `AdminRoute`.
+
+## Estado auth
+
+- Token access en `localStorage`; refresh con interceptor Axios + cookie.
+- Tras login: `handleLoginSuccess` / perfil `/users/me`.
+
+## UI
+
+- Tailwind 4; toasts con `react-hot-toast`.
+- PDF viewer: `react-pdf` / pdfjs — respetar timeouts largos en uploads.
+
+## Limpieza
+
+- No reintroducir leftovers `posts`/`comments` eliminados del producto.

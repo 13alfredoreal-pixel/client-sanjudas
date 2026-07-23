@@ -1,0 +1,35 @@
+---
+description: Convenciones globales BSJT client — workflow, npm, frontera API
+alwaysApply: true
+---
+
+# BSJT Client — Reglas del proyecto
+
+## Workflow
+
+- Issue obligatorio: título `[BSJT-XXX] Descripción` en este repo.
+- Rama = **solo** el ID: `BSJT-012`.
+- PR con `Closes #N`.
+- Cambios de contrato: PR hermano en server-sanJudas + actualizar `docs/API-CONSUMER.md`.
+
+## Stack
+
+- **npm** exclusivamente (no pnpm ni yarn).
+- React 19 + Vite 7 + Tailwind 4.
+- No asumir monorepo ni imports `@shared`.
+
+## Frontera
+
+- Solo HTTP a la API REST (`apiService.js` o sucesor documentado).
+- No Firebase Auth para sesión de biblioteca; JWT + cookie refresh.
+- No Cloudinary/Mongo desde el browser.
+- Roles UI: `USER_ROLE` | `ADMIN_ROLE` vía `ProtectedRoute` / `AdminRoute`.
+
+## Estilo
+
+- Preferir cambios acotados; refactor amplio solo si el usuario lo pide.
+- En refactor: preservar invariantes de `docs/CURRENT-STATE.md` y actualizar `docs/API-CONSUMER.md` si cambia el consumo.
+- Sin secretos en el diff; usar `.env.example`.
+- Docs en español; código en inglés.
+- `docs/ROADMAP.md` es stub hasta nueva redacción — no usarlo como guía.
+- Ver `AGENTS.md`, `docs/API-CONSUMER.md`, `docs/CURRENT-STATE.md`.
