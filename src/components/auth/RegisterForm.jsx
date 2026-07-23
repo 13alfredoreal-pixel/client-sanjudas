@@ -55,10 +55,10 @@ export const RegisterForm = ({ onToggleForm, onRegisterSuccess }) => {
         <div className="p-8 md:p-12">
           <div className="text-center mb-8">
             <div className="inline-block p-4 bg-white/5 rounded-3xl backdrop-blur-md shadow-inner mb-4 transition-transform hover:scale-110">
-              <img src={logo} alt="Logo" className="w-16 h-16 object-contain" />
+              <img src={logo} alt="Biblioteca Virtual SJT" className="w-16 h-16 object-contain" />
             </div>
             <h2 className="text-3xl font-bold text-white tracking-tight">Crea tu cuenta</h2>
-            <p className="mt-2 text-white/60 font-medium">Únete a la comunidad de libros SJT</p>
+            <p className="mt-2 text-white/60 font-medium">Biblioteca Virtual SJT</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
