@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {
   getBooks,
+  createBookPdfUploadUrl,
+  putPdfToSignedUploadUrl,
   uploadBook,
   deleteBook,
   getUsersService,
@@ -96,16 +98,30 @@ export const useAdmin = (user) => {
     }
 
     setUploading(true);
+
+    const uploadUrl = await createBookPdfUploadUrl(form.title);
+    if (uploadUrl.error) {
+      toast.error(uploadUrl.message);
+      setUploading(false);
+      return;
+    }
+
+    const putResult = await putPdfToSignedUploadUrl(uploadUrl.signedUrl, pdfFile);
+    if (putResult.error) {
+      toast.error(putResult.message);
+      setUploading(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', form.title);
     formData.append('author', form.author);
     formData.append('category', form.category);
     formData.append('description', form.description);
-    formData.append('pdf', pdfFile);
+    formData.append('pdfPublicId', uploadUrl.path);
     if (coverFile) formData.append('cover', coverFile);
 
     const result = await uploadBook(formData);
-    setUploading(true); // Se mantiene en true mientras recargamos, o se pone a false al final
 
     if (result.error) {
       toast.error(result.message);
@@ -116,7 +132,6 @@ export const useAdmin = (user) => {
       setForm({ title: '', author: '', category: defaultCat, description: '' });
       setPdfFile(null);
       setCoverFile(null);
-      // Reset file inputs (Esto debe manejarse en la UI, pasaremos el reset handler o los refs)
       if (document.getElementById('pdf-input')) document.getElementById('pdf-input').value = '';
       if (document.getElementById('cover-input')) document.getElementById('cover-input').value = '';
       await fetchBooks();

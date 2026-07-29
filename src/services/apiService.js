@@ -222,8 +222,46 @@ export const getBookById = async (id) => {
 };
 
 /**
- * Sube un nuevo libro PDF (solo ADMIN_ROLE).
- * @param {FormData} formData - Debe contener: title, author, category, description, pdf, cover (opcional)
+ * Pide URL firmada para subir el PDF directo a Supabase (admin).
+ * @returns {{ path, signedUrl, token, expiresIn } | { error: true, message }}
+ */
+export const createBookPdfUploadUrl = async (title) => {
+  try {
+    const response = await apiClient.post('/books/upload-url', { title: title || '' });
+    return response.data;
+  } catch (error) {
+    return {
+      error: true,
+      message: error.response?.data?.message || 'Error al preparar la subida del PDF',
+    };
+  }
+};
+
+/**
+ * Sube el PDF a la signed upload URL de Supabase (fuera del API / Vercel).
+ */
+export const putPdfToSignedUploadUrl = async (signedUrl, file) => {
+  try {
+    const body = new FormData();
+    body.append('cacheControl', '3600');
+    body.append('', file);
+    const response = await fetch(signedUrl, { method: 'PUT', body });
+    if (!response.ok) {
+      const text = await response.text().catch(() => '');
+      return {
+        error: true,
+        message: text || `Error al subir el PDF a Storage (${response.status})`,
+      };
+    }
+    return { ok: true };
+  } catch (error) {
+    return { error: true, message: error.message || 'Error de red al subir el PDF' };
+  }
+};
+
+/**
+ * Registra un libro (solo ADMIN_ROLE) tras subir el PDF a Supabase.
+ * @param {FormData} formData - title, author, category, description, pdfPublicId, cover? (sin archivo pdf)
  */
 export const uploadBook = async (formData) => {
   try {
