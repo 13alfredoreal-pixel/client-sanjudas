@@ -17,16 +17,16 @@ Helpers: `getImageUrl` (solo HTTPS Cloudinary), `getPdfProxyUrl`, `getSignedPdfU
 
 ## Mapa página → API
 
-| UI               | Funciones apiService                                                                      | Endpoints                                       |
-| ---------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Auth             | `loginUser`, `registerUser`, `logoutUser`                                                 | `/auth/login`, `/auth/register`, `/auth/logout` |
-| Bootstrap sesión | `getProfileService`                                                                       | `/users/me`                                     |
-| Library          | `getBooks`, `getCategoriesService`                                                        | `/books`, `/categories`                         |
-| Viewer           | `getBookById`, `getSignedPdfUrl`, `updateReadingProgressService`, restore vía `/users/me` | books + signed-url + reading-progress           |
-| Favoritos        | `getFavoritesService`, `toggleFavoriteService`                                            | favorites / toggle                              |
-| Reviews          | `getReviewsService`, `addReviewService`, `deleteReviewService`                            | `/reviews`                                      |
-| Profile/Settings | `updateProfileService`, `updatePasswordService`                                           | update / update-password                        |
-| Admin            | `uploadBook`, `deleteBook`, categories, users, analytics, Ver PDF → signed-url            | books/categories/users/analytics                |
+| UI               | Funciones apiService                                                                                      | Endpoints                                       |
+| ---------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Auth             | `loginUser`, `registerUser`, `logoutUser`                                                                 | `/auth/login`, `/auth/register`, `/auth/logout` |
+| Bootstrap sesión | `getProfileService`                                                                                       | `/users/me`                                     |
+| Library          | `getBooks`, `getCategoriesService`                                                                        | `/books`, `/categories`                         |
+| Viewer           | `getBookById`, `getSignedPdfUrl`, `updateReadingProgressService`, restore vía `/users/me`                 | books + signed-url + reading-progress           |
+| Favoritos        | `getFavoritesService`, `toggleFavoriteService`                                                            | favorites / toggle                              |
+| Reviews          | `getReviewsService`, `addReviewService`, `deleteReviewService`                                            | `/reviews`                                      |
+| Profile/Settings | `updateProfileService`, `updatePasswordService`                                                           | update / update-password                        |
+| Admin            | `createBookPdfUploadUrl` + `putPdfToSignedUploadUrl` + `uploadBook`, delete, categories, users, analytics | upload-url → Supabase PUT → `/books`            |
 
 ## Auth UX
 
@@ -37,7 +37,8 @@ Helpers: `getImageUrl` (solo HTTPS Cloudinary), `getPdfProxyUrl`, `getSignedPdfU
 
 ## PDFs
 
-- Nuevos libros: Supabase vía `GET /books/:id/signed-url` (no usar `book.pdfUrl` vacío).
+- **Alta (admin):** `POST /books/upload-url` → `PUT` del archivo a `signedUrl` (Supabase) → `POST /books` con `pdfPublicId` (+ cover opcional). Evita el límite ~4.5 MB de Vercel.
+- **Lectura:** `GET /books/:id/signed-url` (no usar `book.pdfUrl` vacío).
 - Progreso: body `{ bookId, page }`; al abrir, restaurar `lastPage` desde `GET /users/me`.
 
 ## Env
