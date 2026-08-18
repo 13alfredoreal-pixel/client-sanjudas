@@ -2,19 +2,20 @@
 
 ## Producción
 
-| Recurso      | Valor                                                              |
-| ------------ | ------------------------------------------------------------------ |
-| Host         | Firebase Hosting                                                   |
-| Proyecto     | `biblioteca-sjt` (`.firebaserc`)                                   |
-| Build output | `dist/`                                                            |
-| URL          | https://biblioteca-sjt.web.app                                     |
-| API          | rewrite `/api/**` → `https://base-rho-lyart.vercel.app/api/:splat` |
+| Recurso      | Valor                                                                                     |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| Host         | Firebase Hosting                                                                          |
+| Proyecto     | `biblioteca-sjt` (`.firebaserc`)                                                          |
+| Build output | `dist/`                                                                                   |
+| URL          | https://biblioteca-sjt.web.app                                                            |
+| API          | `https://server-san-judas-tau.vercel.app/api/v1` (quemado en el build vía `VITE_API_URL`) |
+
+Hobby no usa dominio propio. El alias estable es el `*.vercel.app` del **proyecto** (hoy `server-san-judas-tau`). No usar URLs con hash de un deploy.
 
 ## Build & deploy
 
 ```bash
-# Prod build: same-origin API path
-VITE_API_URL=/api/v1 pnpm build
+VITE_API_URL=https://server-san-judas-tau.vercel.app/api/v1 pnpm build
 firebase deploy --only hosting
 ```
 
@@ -28,12 +29,7 @@ pnpm dev
 ## Checklist post-deploy
 
 - [ ] `/login` carga
-- [ ] Login + catálogo OK (`/api/v1`)
+- [ ] Login + catálogo OK
 - [ ] Viewer PDF (signed-url) OK
-- [ ] Admin Ver PDF / upload OK
+- [ ] Admin Ver PDF / upload (signed upload para PDFs grandes) OK
 - [ ] Logout limpia cookie refresh
-- [ ] Refresh token same-origin vía rewrite
-
-## Preview channels
-
-Añade el origin preview al CORS allowlist del **server** antes de probar auth con cookies.

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '../hooks/useAdmin';
 import { FaUsers, FaBook, FaComment, FaBolt, FaHistory } from 'react-icons/fa';
-import { getImageUrl, getSignedPdfUrl } from '../services/apiService';
+import { getImageUrl, getSignedPdfUrl, resolveReadablePdfUrl } from '../services/apiService';
 import toast from 'react-hot-toast';
 
 /**
@@ -56,13 +56,14 @@ export const AdminPage = ({ user }) => {
     handleDeleteCategory,
   } = useAdmin(user);
 
-  const openBookPdf = async (bookId) => {
-    const result = await getSignedPdfUrl(bookId);
-    if (result.error || !result.signedUrl) {
+  const openBookPdf = async (book) => {
+    const result = await getSignedPdfUrl(book._id);
+    const url = resolveReadablePdfUrl(book, result);
+    if (!url) {
       toast.error(result.message || 'No se pudo abrir el PDF');
       return;
     }
-    window.open(result.signedUrl, '_blank', 'noopener,noreferrer');
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -457,7 +458,7 @@ export const AdminPage = ({ user }) => {
                   <div className="flex gap-2 shrink-0">
                     <button
                       type="button"
-                      onClick={() => openBookPdf(book._id)}
+                      onClick={() => openBookPdf(book)}
                       className="bg-blue-500/10 border border-blue-500/30 text-blue-300 rounded-xl px-3 py-1.5 text-xs font-semibold whitespace-nowrap hover:bg-blue-500/20 transition-colors cursor-pointer font-inherit"
                     >
                       Ver PDF

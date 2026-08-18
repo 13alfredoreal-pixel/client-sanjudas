@@ -37,4 +37,4 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_API_URL: https://base-rho-lyart.vercel.app/api/v1
+          VITE_API_URL: https://server-san-judas-tau.vercel.app/api/v1

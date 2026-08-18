@@ -46,9 +46,21 @@ export const getSignedPdfUrl = async (bookId) => {
     console.error('Error getting signed PDF URL:', error);
     return {
       error: true,
-      message: error.response?.data?.message || 'No se pudo obtener el PDF firmado',
+      message:
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        'No se pudo obtener el PDF firmado',
     };
   }
+};
+
+const isHttpUrl = (value = '') => /^https?:\/\//i.test(value);
+
+/** URL usable del PDF: signed-url del API o pdfUrl HTTP legacy. */
+export const resolveReadablePdfUrl = (book, signed) => {
+  if (signed?.signedUrl) return signed.signedUrl;
+  if (isHttpUrl(book?.pdfUrl)) return book.pdfUrl;
+  return null;
 };
 
 export const logoutUser = async () => {
@@ -270,7 +282,11 @@ export const uploadBook = async (formData) => {
     });
     return response.data;
   } catch (error) {
-    return { error: true, message: error.response?.data?.message || 'Error al subir el libro' };
+    return {
+      error: true,
+      message:
+        error.response?.data?.message || error.response?.data?.error || 'Error al subir el libro',
+    };
   }
 };
 
