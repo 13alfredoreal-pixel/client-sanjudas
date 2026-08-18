@@ -10,7 +10,8 @@
 | pnpm + ESLint / Prettier / Husky | Hecho    | BSJT-008 |
 | Alinear client con API `/api/v1` | Hecho    | BSJT-007 |
 | Branding Biblioteca Virtual SJT  | Hecho    | BSJT-010 |
-| Admin signed upload PDF (Vercel) | En curso | BSJT-017 |
+| Admin signed upload PDF (Vercel) | Hecho    | BSJT-017 |
+| Prod API tau + fallback PDF      | En curso | BSJT-019 |
 | Deploy / hosting prod smoke      | Manual   | —        |
 | Skills `.agents/` Firebase ruido | Aplazado | —        |
 

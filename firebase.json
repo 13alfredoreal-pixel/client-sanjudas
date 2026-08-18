@@ -5,7 +5,7 @@
     "rewrites": [
       {
         "source": "/api/**",
-        "destination": "https://base-rho-lyart.vercel.app/api/:splat"
+        "destination": "https://server-san-judas-tau.vercel.app/api/:splat"
       },
       {
         "source": "**",

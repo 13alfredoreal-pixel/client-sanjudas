@@ -10,7 +10,8 @@ alwaysApply: false
 
 - `.firebaserc` → `biblioteca-sjt`
 - `firebase.json` → `public: dist`
-- Rewrite `/api/**` → API Vercel (`base-rho-lyart.vercel.app`)
+- Rewrite `/api/**` → API Vercel (`server-san-judas-tau.vercel.app`)
+- El SPA de prod se construye con `VITE_API_URL=https://server-san-judas-tau.vercel.app/api/v1`
 
 ## Deploy
 

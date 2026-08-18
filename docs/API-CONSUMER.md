@@ -8,12 +8,12 @@ Archivo: `src/services/apiService.js`
 
 - Axios `baseURL` = `import.meta.env.VITE_API_URL` (default `/api/v1`)
 - Local: `http://localhost:3000/api/v1`
-- Prod (Firebase): `/api/v1` + rewrite Hosting → Vercel (same-origin cookies)
+- Prod: `https://server-san-judas-tau.vercel.app/api/v1` (Hobby; no rewrite same-origin)
 - `withCredentials: true` (refresh cookie)
 - Request interceptor: `Authorization: Bearer ${localStorage.token}`
 - Response interceptor: en 401 intenta `POST /auth/refresh-token` y reintenta cola
 
-Helpers: `getImageUrl` (solo HTTPS Cloudinary), `getPdfProxyUrl`, `getSignedPdfUrl`, `logoutUser`.
+Helpers: `getImageUrl` (solo HTTPS Cloudinary), `getPdfProxyUrl`, `getSignedPdfUrl`, `resolveReadablePdfUrl`, `logoutUser`.
 
 ## Mapa página → API
 

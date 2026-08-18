@@ -7,6 +7,7 @@ import {
   deleteReviewService,
   getSignedPdfUrl,
   getProfileService,
+  resolveReadablePdfUrl,
 } from '../services/apiService';
 import { pdfjs } from 'react-pdf';
 
@@ -58,11 +59,12 @@ export const useBookViewer = (id, user) => {
     setBook(data.book);
 
     const signed = await getSignedPdfUrl(id);
-    if (signed.error || !signed.signedUrl) {
+    const readable = resolveReadablePdfUrl(data.book, signed);
+    if (!readable) {
       setError(signed.message || 'No se pudo cargar el PDF');
       setPdfUrl(null);
     } else {
-      setPdfUrl(signed.signedUrl);
+      setPdfUrl(readable);
     }
 
     // Restaurar progreso de lectura desde el perfil

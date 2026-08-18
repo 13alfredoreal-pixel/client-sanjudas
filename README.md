@@ -16,10 +16,10 @@ git clone https://github.com/13alfredoreal-pixel/client-sanjudas.git
 git clone https://github.com/13alfredoreal-pixel/server-sanJudas.git
 ```
 
-| Capa            | URL prod                          |
-| --------------- | --------------------------------- |
-| SPA (este repo) | https://biblioteca-sjt.web.app    |
-| API             | https://base-rho-lyart.vercel.app |
+| Capa            | URL prod                                |
+| --------------- | --------------------------------------- |
+| SPA (este repo) | https://biblioteca-sjt.web.app          |
+| API             | https://server-san-judas-tau.vercel.app |
 
 ## Stack
 
