@@ -11,7 +11,8 @@
 | Alinear client con API `/api/v1` | Hecho    | BSJT-007 |
 | Branding Biblioteca Virtual SJT  | Hecho    | BSJT-010 |
 | Admin signed upload PDF (Vercel) | Hecho    | BSJT-017 |
-| Prod API tau + fallback PDF      | En curso | BSJT-019 |
+| Prod API tau + fallback PDF      | Hecho    | BSJT-019 |
+| Mostrar error Storage en toasts  | En curso | BSJT-021 |
 | Deploy / hosting prod smoke      | Manual   | —        |
 | Skills `.agents/` Firebase ruido | Aplazado | —        |
 
