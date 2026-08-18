@@ -4,6 +4,12 @@ import axios from 'axios';
  * Local: VITE_API_URL=http://localhost:3000/api/v1
  * Prod (Firebase same-origin rewrite): VITE_API_URL=/api/v1
  */
+const apiErrorMessage = (error, fallback) => {
+  const data = error.response?.data;
+  const parts = [data?.message, data?.error, data?.hint].filter(Boolean);
+  return parts.length ? parts.join(' — ') : fallback;
+};
+
 const apiBaseUrl = import.meta.env.VITE_API_URL || '/api/v1';
 
 const apiClient = axios.create({
@@ -46,10 +52,7 @@ export const getSignedPdfUrl = async (bookId) => {
     console.error('Error getting signed PDF URL:', error);
     return {
       error: true,
-      message:
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        'No se pudo obtener el PDF firmado',
+      message: apiErrorMessage(error, 'No se pudo obtener el PDF firmado'),
     };
   }
 };
@@ -244,7 +247,7 @@ export const createBookPdfUploadUrl = async (title) => {
   } catch (error) {
     return {
       error: true,
-      message: error.response?.data?.message || 'Error al preparar la subida del PDF',
+      message: apiErrorMessage(error, 'Error al preparar la subida del PDF'),
     };
   }
 };
@@ -284,8 +287,7 @@ export const uploadBook = async (formData) => {
   } catch (error) {
     return {
       error: true,
-      message:
-        error.response?.data?.message || error.response?.data?.error || 'Error al subir el libro',
+      message: apiErrorMessage(error, 'Error al subir el libro'),
     };
   }
 };
